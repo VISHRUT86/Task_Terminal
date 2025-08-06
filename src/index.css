@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hacker Terminal Theme - Dark cyberpunk aesthetics with neon green accents */
+
+@layer base {
+  :root {
+    --background: 0 0% 5%;
+    --foreground: 120 100% 50%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 120 100% 50%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 120 100% 50%;
+
+    --primary: 120 100% 50%;
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 120 100% 50%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 120 60% 70%;
+
+    --accent: 120 100% 50%;
+    --accent-foreground: 0 0% 5%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 5%;
+
+    --border: 120 100% 25%;
+    --input: 0 0% 12%;
+    --ring: 120 100% 50%;
+
+    --terminal-bg: 0 0% 5%;
+    --terminal-border: 120 100% 25%;
+    --terminal-glow: 120 100% 50%;
+    --terminal-shadow: 120 100% 50%;
+    
+    --priority-high: 0 100% 50%;
+    --priority-medium: 39 100% 50%;
+    --priority-low: 120 100% 50%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono;
+    background: linear-gradient(135deg, hsl(var(--terminal-bg)) 0%, hsl(0 0% 8%) 100%);
+  }
+}
+
+@layer components {
+  .terminal-window {
+    @apply border border-border rounded-sm bg-card/90 backdrop-blur-sm;
+    box-shadow: 
+      0 0 20px hsl(var(--terminal-shadow) / 0.3),
+      inset 0 1px 0 hsl(var(--terminal-border) / 0.2);
+  }
+  
+  .terminal-text {
+    @apply font-mono text-foreground;
+    text-shadow: 0 0 10px hsl(var(--terminal-glow) / 0.5);
+  }
+  
+  .terminal-glow {
+    @apply text-primary;
+    text-shadow: 
+      0 0 5px hsl(var(--terminal-glow) / 0.8),
+      0 0 10px hsl(var(--terminal-glow) / 0.6),
+      0 0 20px hsl(var(--terminal-glow) / 0.4);
+  }
+  
+  .terminal-input {
+    @apply bg-input border-border text-foreground font-mono;
+    box-shadow: inset 0 0 10px hsl(var(--terminal-shadow) / 0.2);
+  }
+  
+  .priority-high {
+    color: hsl(var(--priority-high));
+    text-shadow: 0 0 5px hsl(var(--priority-high) / 0.5);
+  }
+  
+  .priority-medium {
+    color: hsl(var(--priority-medium));
+    text-shadow: 0 0 5px hsl(var(--priority-medium) / 0.5);
+  }
+  
+  .priority-low {
+    color: hsl(var(--priority-low));
+    text-shadow: 0 0 5px hsl(var(--priority-low) / 0.5);
+  }
+  
+  .matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.03;
+    z-index: -1;
+  }
+  
+  .typing-cursor::after {
+    content: '█';
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  @keyframes matrix-fall {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+  }
+  
+  .matrix-char {
+    position: absolute;
+    color: hsl(var(--terminal-glow));
+    animation: matrix-fall 3s linear infinite;
+    opacity: 0.1;
+  }
+}
